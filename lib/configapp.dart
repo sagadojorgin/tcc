@@ -278,7 +278,7 @@ class ConfigPage extends StatelessWidget {
               Align(
                 child: SizedBox(
                   height: 50.0,
-                  width: 300.0,
+                  width: 350.0,
                   child: ElevatedButton(
                     onPressed: () {
                       _showLimitAdjustmentDialog(context, consumptionLimit);

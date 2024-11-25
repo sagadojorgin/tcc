@@ -263,7 +263,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                     ),
                     SizedBox(height: 16),
                     Wrap(
-                      spacing: 22,
+                      spacing: 12,
                       children: [
                         _buildEditableDayChip(
                             alarm['id'], 'D', 'dom', alarm['dom'] == 1),
@@ -309,7 +309,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected
               ? (Theme.of(context).brightness == Brightness.dark

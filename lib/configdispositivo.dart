@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 //CONSTRUIÇÃO DA TELA DO CELULAR
 bool temadispositivo = false;
@@ -296,10 +297,10 @@ void _showConfirmationDialog(BuildContext context) {
             child: Text('Sim'),
             onPressed: () {
               // TODO: Adicionar lógica para desconectar o dispositivo
-              // Navigator.of(context).pushAndRemoveUntil(
-              //  MaterialPageRoute(builder: (context) => TelaLogin()),
-              // (Route<dynamic> route) => false,
-              //);
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => TelaLogin()),
+                (Route<dynamic> route) => false,
+              );
             },
           ),
         ],

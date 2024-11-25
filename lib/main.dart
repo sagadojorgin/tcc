@@ -27,7 +27,7 @@ void main() async {
     runApp(
       ChangeNotifierProvider(
         create: (context) => appController,
-        child: MyApp(),
+        child: WattSync(),
       ),
     );
   } else {
@@ -117,6 +117,117 @@ Future<bool> initializeDatabase() async {
   } catch (e) {
     print("Erro ao tentar abrir ou criar o banco de dados: $e");
     return false;
+  }
+}
+
+class WattSync extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: TelaLogin(),
+    );
+  }
+}
+
+class TelaLogin extends StatefulWidget {
+  const TelaLogin({super.key});
+
+  @override
+  State<TelaLogin> createState() => _TelaLoginState();
+}
+
+class _TelaLoginState extends State<TelaLogin> {
+  final TextEditingController codigoController = TextEditingController();
+  final _formKey =
+      GlobalKey<FormState>(); // Chave para acessar o estado do formulário
+  final String codigoValido = "123"; // Código de exemplo para validar o acesso
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 30, 82, 144),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Container(
+            padding: EdgeInsets.all(24.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            child: Form(
+              key: _formKey, // Associa o formulário à chave
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Insira o código de verificação',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Venha monitorar e economizar com nosso WattSync!',
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 24),
+                  TextFormField(
+                    controller: codigoController,
+                    decoration: InputDecoration(
+                      labelText: 'Código',
+                      border: OutlineInputBorder(),
+                    ),
+                    textAlign: TextAlign.center,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor, insira o código'; // Mensagem de erro se o campo estiver vazio
+                      } else if (value != codigoValido) {
+                        return 'Código inválido'; // Mensagem de erro se o código estiver incorreto
+                      }
+                      return null; // Código correto
+                    },
+                  ),
+                  SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Adicione a lógica para validar o código aqui
+                      // Verifica se o formulário é válido e se o código está correto
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate()) {
+                        // Se for válido, navega para a próxima tela
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyApp(),
+                          ),
+                        );
+                      } else {
+                        // Atualiza a tela para exibir a mensagem de erro
+                        setState(() {});
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Color.fromARGB(255, 30, 82, 144), // Cor do botão
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    child: Text(
+                      'Acessar',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

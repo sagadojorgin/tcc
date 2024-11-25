@@ -267,7 +267,7 @@ class _TelaHomeState extends State<TelaHome> {
                   ? const Color.fromARGB(255, 30, 31, 28)
                   : const Color.fromARGB(255, 235, 235, 235),
             ),
-            width: 360,
+            width: 365,
             height: 60,
             padding: EdgeInsets.only(left: 20.0, right: 12.0),
             child: Row(
